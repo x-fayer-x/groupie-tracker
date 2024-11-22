@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <meta charset="utf-8">
+  <title>Groupie Tracker</title>
+</head>
+
+<body>
+  <header id="Header">
+    <h1><a href="http://localhost:8080/">Groupie tracker</a></h1>
+    <!--SEARCH BAR-->
+    <form action="/search" method="GET" class="search-form">
+      <input type="text" name="query" list="suggestions">
+
+      <datalist id="suggestions">
+        {{range .Artists}}
+          
+        <option value="{{.Name}} -- Artists"></option>
+          {{range .Members}}
+        <option value="{{.}} -- Members"></option>
+          {{end}}
+        <option value="{{.FirstAlbum}} -- {{.Name}} First Album"></option>
+        <option value="{{.CreationDate}} -- {{.Name}} Creation Date"></option>
+        {{end}}
+        {{range .Locate}}
+          {{range .Locations}}
+          <option value="{{.}} -- Locations"></option>
+          {{end}}
+        {{end}}
+      </datalist>
+
+      <input type="submit" value="Search">
+    </form>
+    <!--END SEARCH BAR-->
+    <form action="/submit" method="post">
+      <div class="container">
+        <!-- CURSEUR DE RECHERCHE FIRST ALBUM-->
+        <div class="rangeslider rangeslider1">
+          <label for="creda3" class="label-first">First Album</label>
+          <div>
+            <input type="range" name="first_album1" min="1958" max="2020" id="creda3" value="1958">
+            <div class="valeur-min-max">
+              <p><output id="value3"></output></p>
+              <script>
+                const value3 = document.querySelector("#value3");
+                const input3 = document.querySelector("#creda3");
+                value3.textContent = input3.value;
+                input3.addEventListener("input", (event) => {
+                  value3.textContent = event.target.value;
+                });
+              </script>
+            </div>
+          </div>
+          <div>
+            <input type="range" name="first_album2" min="1958" max="2020" id="creda4" value="2020">
+            <div class="valeur-min-max">
+              <p><output id="value4"></output></p>
+              <script>
+                const value4 = document.querySelector("#value4");
+                const input4 = document.querySelector("#creda4");
+                value4.textContent = input4.value;
+                input4.addEventListener("input", (event) => {
+                  value4.textContent = event.target.value;
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- CURSEUR DE RECHERCHE CREATION DATE-->
+        <div class="rangeslider rangeslider1">
+          <label for="creda1" class="label-first">Date Creation</label>
+          <div>
+            <input type="range" name="crea_date1" min="1958" max="2015" id="creda1" value="1958">
+            <div class="valeur-min-max">
+              <p><output id="value1" value="value1"></output></p>
+              <script>
+                const value1 = document.querySelector("#value1");
+                const input1 = document.querySelector("#creda1");
+                value1.textContent = input1.value;
+                input1.addEventListener("input", (event) => {
+                  value1.textContent = event.target.value;
+                });
+              </script>
+            </div>
+          </div>
+          <div>
+            <input type="range" name="crea_date2" min="1958" max="2015" id="creda2" value="2015">
+            <div class="valeur-min-max">
+              <p><output id="value2" value="value2"></output></p>
+              <script>
+                const value2 = document.querySelector("#value2");
+                const input2 = document.querySelector("#creda2");
+                value2.textContent = input2.value;
+                input2.addEventListener("input", (event) => {
+                  value2.textContent = event.target.value;
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKBOX MEMBERS-->
+        <div class="checkbox">
+          <label class="label-first">Members</label>
+          <div>
+            <input type="checkbox" name="members-0" id="members-0" value="1" checked>
+            <label class="checklabel" for="members-0">1</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-1" id="members-1" value="2" checked>
+            <label class="checklabel" for="members-1">2</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-2" id="members-2" value="3" checked>
+            <label class="checklabel" for="members-2">3</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-3" id="members-3" value="4" checked>
+            <label class="checklabel" for="members-3">4</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-4" id="members-4" value="5" checked>
+            <label class="checklabel" for="members-4">5</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-5" id="members-5" value="6" checked>
+            <label class="checklabel" for="members-5">6</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-6" id="members-6" value="7" checked>
+            <label class="checklabel" for="members-6">7</label>
+          </div>
+          <div>
+            <input type="checkbox" name="members-7" id="members-7" value="8" checked>
+            <label class="checklabel" for="members-7">8</label>
+          </div>
+
+        </div>
+        <!-- CHAMPS RECHERCHE LOCATIONS -->
+        <div class="searchtext">
+          <label class="label-first">Locations</label>
+          <input type="text" class="text-input" name="locate" placeholder="Entrez du texte ici" value="">
+        </div>
+        <!-- SUBMIT-->
+        <div class="submit">
+          <button type="submit" class="btn-form">Valider</button>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <div id="Content">
+    <div class="container">
+      <form action="/artist" method="post">
+        {{range .Artists}}
+        <div class="square">
+          <div class="img-block">
+            <img src="{{.Image}}" />
+          </div>
+          <div class="content-block">
+            <h3 class="title">{{.Name}}</h3>
+            <div class="block-members">
+              {{range .Members}}
+              <p class="members">{{.}}</p>
+              {{end}}
+            </div>
+            <p class="datecreation"><span class="material-symbols-outlined">new_releases</span>{{.CreationDate}}</p>
+            <p class="firstalbum"><span class="material-symbols-outlined">celebration</span>{{.FirstAlbum}}</p>
+            <button type="submit" name="btn" value={{.Id}} onclick="window.location.href='/artist{{.Id}}'">Cliquez
+              ici</button>
+          </div>
+        </div>
+        {{end}}
+      </form>
+    </div>
+  </div>
+
+  <footer id="Footer">
+    <div class="container">
+      <p class="text-footer">2023 | L.Dagieu - J.Boitrelle</p>
+    </div>
+  </footer>
+</body>
+
+</html>

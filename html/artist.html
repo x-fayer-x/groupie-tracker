@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <meta charset="utf-8">
+    <title>Groupie Tracker</title>
+  </head>
+  <body class="page-artist">
+    <header id="Header">
+      <h1 id ="Title"class="title"><a href="http://localhost:8080/">Groupie tracker</a></h1>
+    </header>
+    
+    <div id="Content">
+      <section class="content">
+        <div class="container">          
+            <div class="square">
+              <div class="row-content">
+                <section class="img-block">
+                  <img src="{{.Artist.Image}}"/>
+                </section>
+                <section class="content-block">
+                  <h3 class="title">{{.Artist.Name}}</h3>
+                  <div class="block-members">
+                    <h4>Les Membres</h4>
+                    <ul class="list-member">
+                    {{range .Artist.Members}}
+                        <li class="members">{{.}}</li>
+                    {{end}}
+                    </ul>
+                  </div>
+                  <section class="section-bottom">
+                    <div class="date-item">
+                      <h4>Création du groupe</h4>
+                      <p class="datecreation"><span class="material-symbols-outlined">new_releases</span>{{.Artist.CreationDate}}</p>
+                    </div>
+                    <div class="date-item">
+                      <h4>Premier Album</h4>
+                      <p class="firstalbum"><span class="material-symbols-outlined">celebration</span>{{.Artist.FirstAlbum}}</p>
+                    </div>
+                  </section>
+                </section>
+              </div>
+
+            
+              
+              <div class="row-icon-box">
+                <div class="icon-box location">
+                    <div class="icon-img">
+                      <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                    <div class="box-content">
+                      <h4>Locations</h4>
+                        <ul class="list-content">
+                            {{range .Locations}}
+                              {{range .Locations}}
+                                <li class="item">{{.}}</li>
+                                {{end}}
+                            {{end}}
+                        </ul>
+                    </div>
+                </div>
+                <!-- ... -->              
+                <div class="icon-box concert">
+                    <div class="icon-img">
+                      <span class="material-symbols-outlined">calendar_month</span>
+                    </div>
+                    <div class="box-content">
+                      <h4>Dates</h4>
+                        <ul class="list-content">
+                          {{range .Dates}}
+                            {{range .Dates}}
+                                <li class="item">{{.}}</li>
+                            {{end}}
+                          {{end}}
+                        </ul>
+                    </div>
+                </div>
+                <!-- ... -->
+                <div class="icon-box relation">
+                    <div class="icon-img">
+                      <span class="material-symbols-outlined">event</span>
+                    </div>
+                    <div class="box-content">
+                      <h4>Relations</h4>
+                      <ul class="list-content">
+                        {{range .TabRelations}}
+                          
+                          <li class="item">{{.}}</li>
+                          
+                          
+                      {{end}}
+                      </ul>
+                    </div>
+                </div> 
+                <!-- ... -->
+              </div>
+             
+            </div>
+       
+        </div>
+      </section>
+    </div>
+
+    <footer id ="Footer">
+      <div class="container">
+        <p class="text-footer">2023 | L.Dagieu - J.Boitrelle</p>
+      </div>
+    </footer>
+
+  </body>
+
+    
+
+</html>
